@@ -116,7 +116,7 @@
 
 		<?php wp_footer(); ?>
 	</body>
-	<script type="text/javascript">
+	<script>
 		jQuery(document).ready(function($) {
             
             if(typeof(Storage)!=="undefined") {

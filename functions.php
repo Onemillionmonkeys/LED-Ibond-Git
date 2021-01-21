@@ -208,5 +208,34 @@ function my_acf_init() {
 add_action('acf/init', 'my_acf_init');
 
 
+function ledibond_scripts() {
+  wp_enqueue_script( 'index', get_stylesheet_directory_uri() . '/js/index.js', array(), '1.0.0', true );
+}
 
-?>
+add_action( 'wp_enqueue_scripts', 'ledibond_scripts' );
+
+function ledibond_head_hreflang_xdefault($url, $lang_code) {
+  if ($lang_code == apply_filters('wpml_default_language', NULL )) {
+    echo '<link rel="alternate" hreflang="x-default" href="' . $url . '">'.PHP_EOL;
+  }
+  return $url;
+}
+add_filter('wpml_alternate_hreflang', 'ledibond_head_hreflang_xdefault', 10, 2);
+
+function defer_parsing_of_js( $url ) {
+  $html = str_replace( "type='text/javascript'", '', $url );
+  if ( is_user_logged_in() ) return $html;
+  if ( FALSE === strpos( $url, '.js' ) ) return $html;
+  if ( strpos( $url, 'jquery.js' ) ) {
+    return str_replace( 'defer', '', $html );
+  };
+  return str_replace( ' src', ' defer src', $html );
+}
+add_filter( 'script_loader_tag', 'defer_parsing_of_js', 10 );
+
+function ledibond_dequeue_jquery() {    
+  if( !is_admin()) {
+    wp_deregister_script('jquery');
+  }
+}
+add_action( 'wp_enqueue_scripts', 'ledibond_dequeue_jquery' );

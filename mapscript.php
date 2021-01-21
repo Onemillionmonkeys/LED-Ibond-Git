@@ -1,5 +1,5 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxDYWTGylq_CZyIMXpcTqzvc7AzwV1c3A"></script>
-	<script type="text/javascript">
+	<script>
                         (function($) {
                         
                         /*
