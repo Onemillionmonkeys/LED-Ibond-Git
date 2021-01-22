@@ -7,7 +7,7 @@
 get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $header = get_field('header_image'); echo $header['sizes']['headerimage']; ?>"
 alt="<?php if ($header['alt']) {echo $header['alt'];}else{echo $header['title'];} ?>">
 						<div class="header-image-title-bar <?php echo get_field('title_color'); ?>">
-							<h1><?php the_title(); ?></h1>
+							<h1><?php if (get_field('title_overwrite')) { the_field('title_overwrite'); } else { the_title(); }; ?></h1>
 							<?php if(get_field('byline')) { echo '<h2>'.get_field('byline').'</h2>'; } ?>
 						</div>
 					</div>
@@ -15,7 +15,7 @@ alt="<?php if ($header['alt']) {echo $header['alt'];}else{echo $header['title'];
 				<main class="main-header-image">
 					<div class="non-header-image">
 						<div class="non-header-image-title-bar">
-								<h1><?php the_title(); ?></h1>
+								<h1><?php if (get_field('title_overwrite')) { the_field('title_overwrite'); } else { the_title(); }; ?></h1>
 								<?php if(get_field('byline')) { echo '<h2>'.get_field('byline').'</h2>'; } ?>
 
 						</div>

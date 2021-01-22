@@ -7,9 +7,12 @@
 get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $header = get_field('header_image'); echo $header['sizes']['headerimage']; ?>"
 alt="<?php if ($header['alt']) {echo $header['alt'];}else{echo $header['title'];} ?>">
 						<div class="header-image-title-bar <?php echo get_field('title_color'); ?> <?php if(get_field('title_background')) { echo 'txt-bg'; } ?>">
-							<h1><?php the_title(); ?></h1>
-													<div></div>
-							<?php if(get_field('byline')) { echo '<h2>'.get_field('byline').'</h2>'; } ?>
+							<?php if(get_field('byline')) : ?>
+									<span class="h1"><?php the_title(); ?></span>
+								<?php else : ?>
+									<h1><?php the_title(); ?></h1>
+								<?php endif; ?>
+							<?php if(get_field('byline')) { echo '<h1 class="h2">'.get_field('byline').'</h1>'; } ?>
 						</div>
 					</div>
 			<?php } else { ?>

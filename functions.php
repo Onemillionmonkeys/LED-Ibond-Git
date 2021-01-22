@@ -24,6 +24,7 @@ function create_product() {
 
   register_post_type( 'product',
     array(
+      'hierarchical' => true,
       'labels' => $labels,
       'public' => true,
       'supports' => $supports,
@@ -51,6 +52,7 @@ function create_technology() {
 
   register_post_type( 'technology',
     array(
+      'hierarchical' => true,
       'labels' => $labels,
       'public' => true,
       'supports' => $supports,
@@ -78,9 +80,11 @@ function create_case() {
 
   register_post_type( 'case',
     array(
+      'hierarchical' => true,
       'labels' => $labels,
       'public' => true,
       'supports' => $supports,
+      
 	  'menu_position' => 5
     )
   );
@@ -105,6 +109,7 @@ function create_segment() {
 
   register_post_type( 'segment',
     array(
+      'hierarchical' => true,
       'labels' => $labels,
       'public' => true,
       'supports' => $supports,
