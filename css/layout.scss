@@ -643,6 +643,7 @@
         margin: 5vw auto;
       }
     }
+    .icon-slide,
     .subscription-slide {
       .slide-text {
         display: block;
@@ -1486,7 +1487,7 @@
     form,
     .wpcf7 {
       margin: 0 1vw 1vw;
-      width: 100%;
+      width: 40vw;
     }
     .wpcf7-form {
       margin: 0;
@@ -1525,7 +1526,7 @@
       }
     }
     .subscription-text {
-      width: 25%;
+      width: 40vw;
       margin: 0 1vw 1vw;
       p {
         font-size: 100%;
@@ -1557,7 +1558,7 @@
       color: $white;
       text-transform: uppercase;
       font-size: 100%;
-      background-color: $orange;
+      background-color: $bgblack;
       -webkit-text-fill-color: $white;
       cursor: pointer;
       padding: .125vw .5vw 0.0625vw;
