@@ -8,7 +8,9 @@ get_header(); ?>
 			<?php if(get_field('header_image')) { ?>
 				<main class="main-header-image">
 					<div class="header-image">
-						<img src="<?php $header = get_field('header_image'); echo $header[sizes][headerimage]; ?>">
+						<img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $header = get_field('header_image'); echo $header['sizes']['headerimage']; ?>"
+							alt="<?php if ($header['alt']) {echo $header['alt'];}else{echo $header['title'];} ?>">
 						<div class="header-image-title-bar <?php echo get_field('title_color'); ?>">
 							<h1><?php the_title(); ?></h1>
 							<?php if(get_field('byline')) { echo '<h2>'.get_field('byline').'</h2>'; } ?>
@@ -25,7 +27,7 @@ get_header(); ?>
 					</div>
 			<?php } ?>
 			<article>
-			<column class="col-6 col-list np">
+			<div class="column col-6 col-list np">
 				
 				<?php
 				$contenttype = get_field('list_items');
@@ -36,11 +38,15 @@ get_header(); ?>
 
 				$the_query = new WP_Query( $args );
 				if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-					<column class="col-2 col-list-item col-field-search">
+					<div class="column col-2 col-list-item col-field-search">
 						<?php if(get_field('header_image')) { ?>
-							<a href="<?php the_permalink(); ?>"><img src="<?php $img = get_field('header_image'); echo $img[sizes][headerimagemicro]; ?>"></a>
+							<a href="<?php the_permalink(); ?>"><img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $img = get_field('header_image'); echo $img['sizes']['headerimagemicro']; ?>"
+								alt="<?php if ($img['alt']) {echo $img['alt'];}else{echo $img['title'];} ?>"></a>
 						<?php } elseif(get_field('thumbnail')) { ?>
-							<a href="<?php the_permalink(); ?>"><img src="<?php $img = get_field('thumbnail'); echo $img[sizes][headerimagemicro]; ?>"></a>
+							<a href="<?php the_permalink(); ?>"><img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $img = get_field('thumbnail'); echo $img['sizes']['headerimagemicro']; ?>"
+								alt="<?php if ($img['alt']) {echo $img['alt'];}else{echo $img['title'];} ?>"></a>
 						<?php } ?>
 						
 						
@@ -54,9 +60,9 @@ get_header(); ?>
 							<?php the_field('byline'); ?>
 						<?php } ?>
 						</p>
-					</column>	
+					</div>	
 				<?php endwhile; wp_reset_postdata(); endif; ?>
-			</column>
+			</div>
 				
 				
 				

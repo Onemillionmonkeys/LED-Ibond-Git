@@ -168,7 +168,7 @@ add_image_size( 'galimage', 1280, 720, true );
 
 function my_acf_admin_head() {
 	?>
-	<style type="text/css">
+	<style>
 		.acf-repeater .acf-field[data-name="main_menu_item"] {		
 			border-top: .5vw #DD0000 solid;
 		}
@@ -206,7 +206,6 @@ function my_acf_init() {
 }
 
 add_action('acf/init', 'my_acf_init');
-
 
 function ledibond_scripts() {
   wp_enqueue_script( 'index', get_stylesheet_directory_uri() . '/js/index.js', array(), '1.0.0', true );

@@ -1,6 +1,6 @@
-					<?php /*?><column class="col-4 col-margin-r-1 col-margin-l-1">
+					<?php /*?><div class="column col-4 col-margin-r-1 col-margin-l-1">
 						<?php the_field('content_part_2'); ?>
-					</column>
+					</div>
 <?php */?>
 
 <?php
@@ -9,20 +9,24 @@ if( have_rows('content_below_media') ):
 ?>
 	<?php if( get_row_layout() == 'text_field' ): ?>
 
-        <column class="col-text col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> col-text-col-<?php the_sub_field('text_columns'); ?>">
+        <div class="column col-text col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> col-text-col-<?php the_sub_field('text_columns'); ?>">
 			<?php if(get_sub_field('image_over_text')) { ?>
-                <img src="<?php $img = get_sub_field('image_over_text'); echo $img[sizes][large]; ?>">
+                <img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $img = get_sub_field('image_over_text'); echo $img['sizes']['large']; ?>"
+                    alt="<?php if ($img['alt']) {echo $img['alt'];}else{echo $img['title'];} ?>">
 			<?php } ?>
             <?php if(get_sub_field('field_title')) { ?>
 				<h3 class="text-field-title<?php if(get_sub_field('align_title_right')) { echo ' align-right'; } ?> <?php if(get_sub_field('align_title_center')) { echo ' align-center'; } ?>"><?php the_sub_field('field_title'); ?></h3>
 			<?php } ?>
 			<?php the_sub_field('text'); ?>
-		</column>
+		</div>
 	<?php elseif( get_row_layout() == 'profile_field' ): ?>
-		<column class="col-profile col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> <?php if(get_sub_field('align_content_top')) : echo 'align-top'; endif; ?>">
+		<div class="column col-profile col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> <?php if(get_sub_field('align_content_top')) : echo 'align-top'; endif; ?>">
             <?php if(get_sub_field('profile_image')) { ?>
 			<div class="profile-image">
-				<img src="<?php $por = get_sub_field('profile_image'); echo $por[url]; ?>">
+				<img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $por = get_sub_field('profile_image'); echo $por['url']; ?>"
+                    alt="<?php if ($por['alt']) {echo $por['alt'];}else{echo $por['title'];} ?>">
 			</div>
             <?php } ?>
 			<div class="profile-content">
@@ -32,21 +36,20 @@ if( have_rows('content_below_media') ):
 				<p>
 					<?php if(get_sub_field('phone')) { ?><?php the_field('phone_string', 'options'); ?> <?php the_sub_field('phone'); ?><br><?php } ?>
 					<?php if(get_sub_field('email')) { ?><?php the_field('email_string', 'options'); ?> <a href="mailto:<?php echo antispambot(get_sub_field('email'), 1); ?>" itemprop="email"><?php echo antispambot(get_sub_field('email')); ?></a><?php } ?>
-                    <?php if(get_sub_field('stocks')) { ?><br><br><?php the_sub_field('stocks'); ?><?php } ?>
 				</p>
 				<?php if( have_rows('social_connection') ): ?>
 					<div class="social-connections">
 						<?php while ( have_rows('social_connection') ) : the_row(); ?>
-						<a href="<?php echo get_sub_field('link'); ?>" target="_blank" rel="nofollow"><img src="<?php $icon = get_field(get_sub_field('social_media'), 'options'); echo $icon[url]; ?>"></a>
-
-
+						<a href="<?php echo get_sub_field('link'); ?>" target="_blank" rel="nofollow"><img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $icon = get_field(get_sub_field('social_media'), 'options'); echo $icon['url']; ?>"
+                            alt="<?php if ($icon['alt']) {echo $icon['alt'];}else{echo $icon['title'];} ?>"></a>
 						<?php endwhile; ?>
 					</div>
 				<?php endif; ?>
 			</div>
-		</column>
+		</div>
 	<?php elseif( get_row_layout() == 'map_field' ): ?>
-		<column class="col-field-map col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?>">
+		<div class="column col-field-map col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?>">
 
 				<?php if( have_rows('map_markers') ): ?>
 					<div class="acf-map">
@@ -69,23 +72,25 @@ if( have_rows('content_below_media') ):
 			
 			
 			
-		</column>
+		</div>
 
 	<?php elseif( get_row_layout() == 'image_field' ): ?>
-		<column class="col-field-image col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> <?php if(get_sub_field('adjust_height_of_image')) { echo 'col-image-full-height'; } ?>">
-        	<img src="<?php $img = get_sub_field('content_image'); echo $img[sizes][large]; ?>">
-		</column>
+		<div class="column col-field-image col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> <?php if(get_sub_field('adjust_height_of_image')) { echo 'col-image-full-height'; } ?>">
+        	<img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $img = get_sub_field('content_image'); echo $img['sizes']['large']; ?>"
+                alt="<?php if ($img['alt']) {echo $img['alt'];}else{echo $img['title'];} ?>">
+		</div>
 	<?php elseif( get_row_layout() == 'video_field' ): ?>
-		<column class="col-field-video col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">
+		<div class="column col-field-video col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">
             <?php if(get_sub_field('title')) { ?>
             <div class="title-bar np">
                 <h2><?php the_sub_field('title'); ?></h2>
             </div>
             <?php } ?>
         	<iframe id="ytplayer" type="text/html" width="100%" height="100%" data-category-consent="cookie_cat_marketing" src="" data-consent-src="https://www.youtube.com/embed/<?php the_sub_field('video_embed_id'); ?>?modestbranding=1&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
-		</column>
+		</div>
     <?php elseif( get_row_layout() == 'download_field' ): ?>
-            <column class="download-col col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> "> 
+            <div class="column download-col col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> "> 
                 <div class="title-bar np">
                     <h2><?php the_sub_field('title'); ?></h2>
                 </div>
@@ -96,9 +101,9 @@ if( have_rows('content_below_media') ):
                         </div>
                     <?php endwhile; ?>
 
-            </column>
+            </div>
     <?php elseif( get_row_layout() == 'related_content_field' ): ?>
-            <column class="download-col col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> "> 
+            <div class="column download-col col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> "> 
                 <div class="title-bar np">
                     <h2><?php the_sub_field('title'); ?></h2>
                 </div>
@@ -109,7 +114,7 @@ if( have_rows('content_below_media') ):
                         </div>
                     <?php endforeach; endif; ?>
 
-            </column>
+            </div>
 
     <?php elseif( get_row_layout() == 'investor_news_field' ): ?>
         
@@ -158,7 +163,7 @@ if( have_rows('content_below_media') ):
                 if(count($press) == $pressMax) {
                     //echo $_SERVER['HTTP_HOST']. explode('?', $_SERVER['REQUEST_URI'], 2)[0];
                     
-                    echo '<column class="col-media-gallery np col-'.get_sub_field('width').' col-margin-r-'.get_sub_field('margin_right').' col-margin-l-'.get_sub_field('margin_left').'">';
+                    echo '<div class="column col-media-gallery np col-'.get_sub_field('width').' col-margin-r-'.get_sub_field('margin_right').' col-margin-l-'.get_sub_field('margin_left').'">';
                         echo '<div class="nav-bar">';
 				            for($x = 1; $x <= $pressPages; $x++) {
                                 $from = ($x-1)*$pressMax + 1;
@@ -172,23 +177,25 @@ if( have_rows('content_below_media') ):
 				            }
 							echo '</div>';
                     
-                    echo '</column>';
+                    echo '</div>';
                 }
             
             ?>
             
-          <column class=" col-list np col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">  
+          <div class="column col-list np col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">  
             <?php
                 foreach($press as $n) :
                     if($pressNum >= $pressStart && $pressNum < ($pressStart + $pressMax)) : ?>
-                    <column class="col-2 col-list-item col-field-search">
+                    <div class="column col-2 col-list-item col-field-search">
                         <?php 
                             $i = $n->Images->ReleaseImage;
                             if(isset( $i->UrlTo400x400ArResized)) {
-                                echo '<a href="'. $n->CisionWireUrl.'" target="_blank" rel="nofollow"><img src="'.$i->UrlTo400x400ArResized.'" alt="'.$n->Description.'"></a>';
+                                echo '<a href="'. $n->CisionWireUrl.'" target="_blank" rel="nofollow"><img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="'.$i->UrlTo400x400ArResized.'" alt="'.$n->Description.'"></a>';
                             } else {
                                 $thumb = get_field('placeholder_thumb','options');
-                                 echo '<a href="'. $n->CisionWireUrl.'" target="_blank" rel="nofollow"><img src="'.$thumb['sizes']['headerimagemicro'].'" alt="'.$n->Description.'"></a>';
+                                 echo '<a href="'. $n->CisionWireUrl.'" target="_blank" rel="nofollow"><img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="'.$thumb['sizes']['headerimagemicro'].'" alt="'.$n->Description.'"></a>';
                             };
                             if ( is_user_logged_in() ) { 
                                 //var_dump($n);
@@ -202,15 +209,15 @@ if( have_rows('content_below_media') ):
                             <?php echo $n->Intro; ?>
 
                         </p>
-                    </column>
+                    </div>
             <?php 
                     endif;
                 $pressNum++;
                 endforeach;
             ?>
-            </column>    
+            </div>    
             <?php elseif( get_row_layout() == 'calendar_field' ): ?>
-                <column class=" col-calendar np col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">
+                <div class="column col-calendar np col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">
                 <?php
                 $year = 1999;    
                     
@@ -240,9 +247,9 @@ if( have_rows('content_below_media') ):
                     endwhile;
                 endif;
                 ?>
-                </column>
+                </div>
         <?php elseif( get_row_layout() == 'investor_news_signup_field' ): ?>
-            <column class="col-subscription np col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">
+            <div class="column col-subscription np col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">
                 <div class="title-bar">
                     <h2><?php the_field('sub_title', 'options'); ?></h2>
 
@@ -266,43 +273,27 @@ if( have_rows('content_below_media') ):
                     </form>
 
                 </div>
-            </column>
+            </div>
         <?php elseif( get_row_layout() == 'contact_form_field' ): ?>
-            <column class="col-subscription np col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> <?php if(get_sub_field('fold_out')) echo 'col-fold-out'; ?>">
+            <div class="column col-subscription np col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">
                 <div class="title-bar">
-                    <h2><?php if(get_sub_field('title')) { echo get_sub_field('title'); } else { echo get_field('contact_form_title', 'options'); } ?></h2>
+                    <h2><?php the_field('contact_form_title', 'options'); ?></h2>
 
                 </div>
                 <div class="subscription">
-                    <?php if(!get_sub_field('no_text')) { ?>
                     <div class="subscription-text">
-                        <p><?php if(get_sub_field('text')) { echo get_sub_field('text'); } else { echo get_field('contact_form_text', 'options'); } ?></p>
+                        <p><?php the_field('contact_form_text', 'options'); ?></p>
                     </div>
-                    <?php } ?>
                     
-                    <?php if(get_sub_field('contact_form') == 'landing') {
-                        echo (get_field('german')) ?  do_shortcode( '[contact-form-7 id="6138" title="Contact form Landing Deutch"]' ) : do_shortcode( '[contact-form-7 id="5267" title="Contact form Landing"]' );;
-                    } else if(get_sub_field('contact_form') == 'talk') {
-                        if(get_field('german')) {
-                            echo do_shortcode( '[contact-form-7 id="6144" title="Contact form lets talk Deutch"]' );
-                            if(get_sub_field('fold_out')) echo '<div class="hero-btn hero-btn-content">RUFEN SIE MICH AN</div>';    
-                        } else {
-                            echo do_shortcode( '[contact-form-7 id="5621" title="Contact form lets talk"]' );
-                            if(get_sub_field('fold_out')) echo '<div class="hero-btn hero-btn-content">Give me a call</div>';    
-                        }
-                        
+                    <?php if(get_sub_field('contact_form') == '5267') {
+                    
+                        echo do_shortcode( '[contact-form-7 id="5267" title="Contact form Landing"]' );
                     } else {
                         echo do_shortcode( '[contact-form-7 id="4876" title="Contact form 1"]' );
                     } ?>
                     
-                    
-                    
                 </div>
-            </column>
-        <?php elseif( get_row_layout() == 'wrapper_start' ): ?>
-            <column class="col-wrapper np col-<?php the_sub_field('width'); ?> col-margin-r-<?php the_sub_field('margin_right'); ?> col-margin-l-<?php the_sub_field('margin_left'); ?> ">
-        <?php elseif( get_row_layout() == 'wrapper_end' ): ?>
-            </column>    
+            </div>
         <?php endif; ?>
 <?php
     endwhile;

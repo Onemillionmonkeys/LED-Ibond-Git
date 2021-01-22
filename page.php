@@ -3,7 +3,9 @@
 			<?php if(get_field('header_image')) { ?>
 				<main class="main-header-image">
 					<div class="header-image">
-						<img src="<?php $header = get_field('header_image'); echo $header[sizes][headerimage]; ?>">
+						<img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $header = get_field('header_image'); echo $header['sizes']['headerimage']; ?>"
+							alt="<?php if ($header['alt']) {echo $header['alt'];}else{echo $header['title'];} ?>">
 						<div class="header-image-title-bar <?php echo get_field('title_color'); ?>">
 							<h1><?php the_title(); ?></h1>
 							<?php if(get_field('byline')) { echo '<h2>'.get_field('byline').'</h2>'; } ?>
@@ -19,20 +21,12 @@
 						</div>
 					</div>
 			<?php } ?>
-
-			
-			
-			
-			
 			<article>
-				
 				<?php if(get_field('content_below_media')) { ?>
-					<column class="col-6 col-list np nmb">
-					<?php include ('content.php'); ?>
-					</column>
-				<?php } ?>
-				
-				
+					<div class="column col-6 col-list np nmb">
+						<?php include ('content.php'); ?>
+					</div>
+				<?php } ?>				
 			</article>
 		</main>
 	<?php endwhile; // end of the loop. ?>

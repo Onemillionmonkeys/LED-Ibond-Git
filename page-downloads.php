@@ -13,7 +13,7 @@ get_header(); ?>
 			</div>
 			
 			<article>
-				<column class="col-6 col-list np">
+				<div class="column col-6 col-list np">
 					<?php 
 						$contenttype = array('product', 'case');
 						$contenttitle = array(get_field('products', 'options'), get_field('case', 'options'));
@@ -28,12 +28,12 @@ get_header(); ?>
 							$the_query = new WP_Query( $args );
 							if ( $the_query->have_posts() ) : 
 						?>
-							<column class="col-6 nmb">
+							<div class="column col-6 nmb">
 								<h2><?php echo $contenttitle[$x]; ?></h2>
-							</column>
+							</div>
 							<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 								<?php if( have_rows('downloads') ): ?>
-									<column class="download-col col-2">
+									<div class="column download-col col-2">
 										<div class="title-bar np">
 											<h3><?php the_title(); ?></h3>
 										</div>
@@ -43,12 +43,12 @@ get_header(); ?>
 												<a href="<?php echo $file['url']; ?>" download rel="nofollow"><?php the_sub_field('title'); ?><?php if(get_sub_field('filetype')) { ?> <span>&#40;<?php the_sub_field('filetype'); ?>&#41;</span><?php } ?></a>
 											</div>
 										<?php endwhile; ?>
-									</column>
+									</div>
 								<?php endif; ?>
 							<?php endwhile; wp_reset_postdata(); ?>
 						<?php endif; ?>
 					<?php } ?>
-				</column>
+				</div>
 			</article>
 		</main>
 	<?php endwhile; // end of the loop. ?>

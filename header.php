@@ -2,15 +2,15 @@
 <html <?php language_attributes(); ?> class="no-js">
 	<head>
 		<meta charset="<?php bloginfo('charset'); ?>">
-		<title><?php bloginfo('name'); ?> 
+		<title><?php wp_title( '|', true, 'right' ); ?></title>
         <?php if(is_front_page()) { echo ' – '.get_bloginfo('description'); } else { wp_title('–', true, 'left'); } ?></title>
-		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/layout.css?v=6" type='text/css'>
+		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/layout.css?v=2">
 		<link href="/favicon.ico?v=2" rel="shortcut icon">
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		<script src="/wp-includes/js/jquery/jquery.js"></script>
 		<script src="/wp-includes/js/jquery-visible-master/jquery.visible.js"></script>
-		<script src="https://www.youtube.com/player_api"></script>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script src="https://www.youtube.com/player_api" defer></script>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
 		<script src="https://use.typekit.net/khp5iyp.js"></script>
@@ -31,10 +31,10 @@
 
           gtag('config', 'UA-75008330-1');
         </script>
-        
+		
 		<?php wp_head(); ?>
 
-        <?php if (get_post_type() === 'product') : ?>
+		<?php if (get_post_type() === 'product') : ?>
 			<script type=application/ld+json>
 				{
 					"@context": "https://schema.org/",
@@ -117,7 +117,7 @@
         <!-- End Google Tag Manager (noscript) -->
 		<div class="headerbar<?php if(get_page_template_slug() == 'page-landing.php' || get_field('landing_page') ) { echo ' landing-page'; } ?>">
 			<div class="header-shade shade"></div>
-            <header>
+			<header>
 				<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 					<img class="lazy header-logo" alt="Led iBond logo" src="<?php echo 
 get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $logo = get_field('main_logo', 'options'); echo $logo['url']; ?>">

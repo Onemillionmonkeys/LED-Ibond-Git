@@ -20,8 +20,8 @@
                                                 while ( have_rows('sublevel_content') ) : the_row();
                                             ?>
                                                 <?php if( get_row_layout() == 'text_content' ): ?>
-                                                    <?php if(get_sub_field('wrapper_start')) { echo '<column class="wrapper-col col-'.get_sub_field('wrapper_width').'">'; } ?>
-                                                        <column class="col-<?php the_sub_field('width'); ?> col-menu-txt <?php if(get_sub_field('align_text_to_the_right')) { echo 'align-right'; } ?>">
+                                                    <?php if(get_sub_field('wrapper_start')) { echo '<div class="wrapper-col col-'.get_sub_field('wrapper_width').'">'; } ?>
+                                                        <div class="col-<?php the_sub_field('width'); ?> col-menu-txt <?php if(get_sub_field('align_text_to_the_right')) { echo 'align-right'; } ?>">
                                                             <?php 
                                                                 if(get_sub_field('title') && !get_sub_field('links_check') && !get_sub_field('custom_links')) { 
                                                                     echo '<h2>'.get_sub_field('title').'</h2>'; 
@@ -55,10 +55,10 @@
                                                                 <?php endwhile; endif; ?>
                                                             <?php } ?>
 
-                                                        </column>
-                                                    <?php if(get_sub_field('wrapper_end')) { echo '</column>'; } ?>
+                                                        </div>
+                                                    <?php if(get_sub_field('wrapper_end')) { echo '</div>'; } ?>
                                                 <?php elseif( get_row_layout() == 'list_content' ): ?>
-                                                    <column class="col-<?php the_sub_field('width'); ?> col-menu-list np">
+                                                    <div class="col-<?php the_sub_field('width'); ?> col-menu-list np">
                                                         <?php $contenttype = get_sub_field('content_type'); $items_per_row = get_sub_field('items_per_row'); ?>
                                                         <div class="list-content-con">
                                                             <?php if(get_sub_field('curated_list')) { ?>
@@ -68,15 +68,17 @@
 
                                                                 if( $relposts ): ?>
                                                                     <?php foreach( $relposts as $p ): // variable must NOT be called $post (IMPORTANT) ?>
-                                                                        <column class="list-col-<?php echo $items_per_row; ?>">
+                                                                        <div class="list-col-<?php echo $items_per_row; ?>">
                                                                             <?php if(get_field('header_image', $p->ID)) { ?>
-                                                                                <a href="<?php the_permalink() ?>"><img src="<?php $img = get_field('header_image', $p->ID); echo $img[sizes][headerimagemicro]; ?>"></a>
+                                                                                <a href="<?php the_permalink() ?>"><img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $img = get_field('header_image', $p->ID); echo $img['sizes']['headerimagemicro']; ?>"></a>
                                                                             <?php } elseif(get_field('thumbnail', $p->ID)) { ?>
-                                                                                <a href="<?php the_permalink() ?>"><img src="<?php $img = get_field('thumbnail', $p->ID); echo $img[sizes][headerimagemicro]; ?>"></a>
+                                                                                <a href="<?php the_permalink() ?>"><img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $img = get_field('thumbnail', $p->ID); echo $img['sizes']['headerimagemicro']; ?>"></a>
                                                                             <?php } ?>
                                                                             <h3><a href="<?php the_permalink() ?>"><?php echo get_the_title( $p->ID ); ?></a></h3>
                                                                             <p><?php the_field('excerpt', $p->ID); ?></p>
-                                                                        </column>	
+                                                                        </div>	
                                                                     <?php endforeach; ?>
 
                                                                 <?php endif; ?>
@@ -94,15 +96,17 @@
                                                             ?>
                                                                 <?php if( $guides ): ?>
                                                                     <?php foreach( $guides as $guide ): ?>
-                                                                        <column class="list-col-<?php echo $items_per_row; ?> <?php if(get_sub_field('center_aligned_titles')) { echo 'center'; } ?>">
+                                                                        <div class="list-col-<?php echo $items_per_row; ?> <?php if(get_sub_field('center_aligned_titles')) { echo 'center'; } ?>">
                                                                             <?php if(get_field('header_image', $guide->ID)) { ?>
-                                                                                <a href="<?php echo get_the_permalink($guide->ID); ?>"><img src="<?php $img = get_field('header_image', $guide->ID); echo $img[sizes][headerimagemicro]; ?>"></a>
+                                                                                <a href="<?php echo get_the_permalink($guide->ID); ?>"><img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $img = get_field('header_image', $guide->ID); echo $img['sizes']['headerimagemicro']; ?>"></a>
                                                                             <?php } elseif(get_field('thumbnail', $guide->ID)) { ?>
-                                                                                <a href="<?php echo get_the_permalink($guide->ID); ?>"><img src="<?php $img = get_field('thumbnail', $guide->ID); echo $img[sizes][headerimagemicro]; ?>"></a>
+                                                                                <a href="<?php echo get_the_permalink($guide->ID); ?>"><img class="lazy" src="<?php echo 
+get_stylesheet_directory_uri(); ?>/images/placeholder.png" data-src="<?php $img = get_field('thumbnail', $guide->ID); echo $img['sizes']['headerimagemicro']; ?>"></a>
                                                                             <?php } ?>
                                                                             <h3><a href="<?php echo get_the_permalink($guide->ID); ?>"><?php echo get_the_title($guide->ID); ?></a></h3>
                                                                             <p><?php the_field('excerpt', $guide->ID); ?></p>
-                                                                        </column>	
+                                                                        </div>	
                                                                     <?php endforeach; ?>
 
                                                                 <?php endif; ?>
@@ -110,7 +114,7 @@
 
                                                             <?php } ?>
                                                         </div>
-                                                    </column>
+                                                    </div>
 
                                                 <?php endif; ?>
                                             <?php
