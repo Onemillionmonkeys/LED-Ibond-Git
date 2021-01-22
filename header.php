@@ -2,8 +2,7 @@
 <html <?php language_attributes(); ?> class="no-js">
 	<head>
 		<meta charset="<?php bloginfo('charset'); ?>">
-		<title><?php wp_title( '|', true, 'right' ); ?></title>
-        <?php if(is_front_page()) { echo ' – '.get_bloginfo('description'); } else { wp_title('–', true, 'left'); } ?></title>
+		<title><?php wp_title( '|', true, 'right' ); ?><?php if(is_front_page()) { echo ' – '.get_bloginfo('description'); } else { wp_title('–', true, 'left'); } ?></title>
 		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/layout.css?v=2">
 		<link href="/favicon.ico?v=2" rel="shortcut icon">
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
